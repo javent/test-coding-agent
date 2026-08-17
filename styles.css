@@ -81,6 +81,10 @@ img {
   object-fit: cover;
 }
 
+img.is-missing {
+  opacity: 0;
+}
+
 h1,
 h2,
 p {
@@ -477,100 +481,140 @@ p {
   }
 }
 
-@media (min-width: 810px) and (max-width: 1199.98px) {
-  .site-shell {
-    width: 810px;
+/* Fluid tablet and small-desktop layout. */
+@media (min-width: 640px) and (max-width: 1199.98px) {
+  :root {
+    --radius: clamp(14px, 2vw, 24px);
+    --grid-gap: clamp(10px, 1.5vw, 16px);
   }
 
-  .eyebrow {
-    width: 720px;
+  .site-shell {
+    width: 100%;
+    max-width: 1016px;
+    padding: 48px clamp(32px, 4.7vw, 48px) 72px;
+  }
+
+  .eyebrow,
+  .intro-lead {
+    width: min(800px, 100%);
+  }
+
+  .intro-copy {
+    width: min(660px, 100%);
   }
 
   .intro-lead {
-    width: 100%;
-    font-size: 40px;
+    font-size: clamp(36px, 4.4vw, 48px);
+  }
+
+  .intro-copy {
+    font-size: clamp(22px, 2.55vw, 26px);
+  }
+
+  .work {
+    margin-top: clamp(144px, 17vw, 192px);
+  }
+
+  .work-gallery {
+    gap: var(--grid-gap);
   }
 
   .project--hero {
-    height: 401.609375px;
-    aspect-ratio: auto;
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
 
   .project-row--discord {
-    grid-template-columns: 206px 492px;
-    height: 470px;
+    grid-template-columns: 29% minmax(0, 1fr);
+    height: auto;
+    aspect-ratio: 1.52;
+    gap: var(--grid-gap);
   }
 
   .project-stack--discord {
-    grid-template-rows: 230px 230px;
+    grid-template-rows: 1fr 1fr;
+    gap: max(8px, calc(var(--grid-gap) - 6px));
   }
 
   .project-row--backyard {
-    grid-template-columns: 408px 290px;
-    height: 416px;
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+    aspect-ratio: 1.55;
+    gap: var(--grid-gap);
   }
 
-  .project-row--backyard > .project {
-    height: 478px;
-  }
-
-  .project-stack--backyard {
-    grid-template-rows: 200px 200px;
-    height: 416px;
+  .project-stack--backyard,
+  .project-stack--quantum,
+  .project-stack--legacy-one,
+  .project-stack--legacy-two {
+    grid-template-rows: 1fr 1fr;
+    gap: var(--grid-gap);
   }
 
   .project-row--quantum {
-    grid-template-columns: 296px 402px;
+    grid-template-columns: 48% minmax(0, 1fr);
+    height: auto;
+    aspect-ratio: 1.5;
+    gap: var(--grid-gap);
+  }
+
+  .legacy-grid {
+    gap: max(8px, calc(var(--grid-gap) - 6px));
   }
 
   .project-row--legacy-one {
-    grid-template-columns: 450px 248px;
+    grid-template-columns: 65% minmax(0, 1fr);
+    height: auto;
+    aspect-ratio: 2.05;
+    gap: var(--grid-gap);
   }
 
   .project-row--legacy-two {
-    grid-template-columns: 292px 406px;
-    height: 306px;
+    grid-template-columns: 42% minmax(0, 1fr);
+    height: auto;
+    aspect-ratio: 2.2;
+    gap: var(--grid-gap);
   }
 
-  .project-stack--legacy-two {
-    grid-template-rows: 145px 145px;
+  .about {
+    margin-top: clamp(168px, 20vw, 237px);
   }
 
-  .about-intro p {
-    min-height: 218.421875px;
-  }
-
+  .about-intro p,
   .about-copy {
-    min-height: 156.015625px;
-  }
-
-  .site-footer,
-  .chat-button {
-    min-height: 80px;
-    height: 80px;
+    min-height: 0;
   }
 
   .photo-grid {
-    grid-template-columns: 119.671875px 578.328125px;
-    height: 320px;
+    grid-template-columns: 18% minmax(0, 1fr);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2.1;
   }
 
   .photo-stack {
-    grid-template-rows: 152px 152px;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .site-footer {
+    min-height: 72px;
+    height: auto;
+    margin-top: clamp(28px, 4vw, 48px);
   }
 }
 
-@media (max-width: 809.98px) {
+/* Phones and compact tablets use a proportional version of the original mosaic. */
+@media (max-width: 639.98px) {
   :root {
-    --radius: 8px;
+    --radius: clamp(8px, 2vw, 12px);
     --grid-gap: 8px;
   }
 
   .site-shell {
-    width: min(400px, 100%);
+    width: 100%;
+    max-width: none;
     margin-inline: auto;
-    padding: 48px 24px;
+    padding: 48px clamp(20px, 6.15vw, 24px);
   }
 
   .header-spacer {
@@ -578,7 +622,7 @@ p {
   }
 
   .intro {
-    margin-top: 88px;
+    margin-top: clamp(72px, 24vw, 88px);
     gap: 12px;
   }
 
@@ -589,48 +633,54 @@ p {
   }
 
   .eyebrow {
-    font-size: 18px;
+    font-size: clamp(17px, 4.6vw, 18px);
     line-height: 1.2;
   }
 
   .intro-lead {
-    font-size: 32px;
+    font-size: clamp(28px, 8.2vw, 32px);
     line-height: 1;
   }
 
   .intro-copy {
-    font-size: 20px;
+    font-size: clamp(18px, 5.15vw, 20px);
     line-height: 1.4;
   }
 
   .work {
-    margin-top: 176px;
+    margin-top: clamp(128px, 45vw, 176px);
   }
 
   .section-heading h2,
   .section-heading p {
-    font-size: 16px;
+    font-size: clamp(15px, 4.1vw, 16px);
     line-height: 1.4;
   }
 
   .work-gallery {
-    width: min(342px, 100%);
-    margin: 8px auto 0;
+    width: 100%;
+    margin: 8px 0 0;
     gap: 8px;
   }
 
   .project--hero {
+    height: auto;
     aspect-ratio: 16 / 9;
   }
 
   .project-row--discord {
     grid-template-columns: 1fr 1.93fr;
     gap: 8px;
+    width: 100%;
     height: auto;
     aspect-ratio: 342 / 231;
   }
 
-  .project-stack--discord {
+  .project-stack--discord,
+  .project-stack--backyard,
+  .project-stack--quantum,
+  .project-stack--legacy-one,
+  .project-stack--legacy-two {
     grid-template-rows: 1fr 1fr;
     gap: 8px;
   }
@@ -638,25 +688,17 @@ p {
   .project-row--backyard {
     grid-template-columns: 1.4925fr 1fr;
     gap: 8px;
+    width: 100%;
     height: auto;
     aspect-ratio: 342 / 180;
-  }
-
-  .project-stack--backyard {
-    grid-template-rows: 1fr 1fr;
-    gap: 8px;
   }
 
   .project-row--quantum {
     grid-template-columns: 1fr 1.4925fr;
     gap: 8px;
+    width: 100%;
     height: auto;
     aspect-ratio: 342 / 280;
-  }
-
-  .project-stack--quantum {
-    grid-template-rows: 1fr 1fr;
-    gap: 8px;
   }
 
   .legacy-grid {
@@ -666,75 +708,68 @@ p {
   .project-row--legacy-one {
     grid-template-columns: 2.036fr 1fr;
     gap: 8px;
+    width: 100%;
     height: auto;
+    margin-left: 0;
     aspect-ratio: 342 / 140;
-  }
-
-  .project-stack--legacy-one {
-    grid-template-rows: 1fr 1fr;
-    gap: 8px;
   }
 
   .project-row--legacy-two {
     grid-template-columns: 1fr 2.036fr;
     gap: 8px;
+    width: 100%;
     height: auto;
     aspect-ratio: 342 / 170;
   }
 
-  .project-stack--legacy-two {
-    grid-template-rows: 1fr 1fr;
-    gap: 8px;
+  .about {
+    margin-top: clamp(112px, 40vw, 157px);
   }
 
-  .about {
-    margin-top: 157px;
+  .about-intro {
+    gap: clamp(8px, 2.5vw, 10px);
   }
 
   .about-intro h2 {
-    font-size: 20px;
+    font-size: clamp(19px, 5.1vw, 20px);
     line-height: 1;
   }
 
   .about-intro p,
   .about-copy {
-    font-size: 16px;
+    min-height: 0;
+    font-size: clamp(15px, 4.1vw, 16px);
     line-height: 1.2;
-  }
-
-  .about-intro p {
-    min-height: 172.828125px;
-  }
-
-  .about-copy {
-    min-height: 115.21875px;
   }
 
   .photo-grid {
     grid-template-columns: 27.663% minmax(0, 1fr);
     gap: 8px;
-    height: 204px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 342 / 204;
   }
 
   .photo-stack {
-    grid-template-rows: 98px 98px;
+    grid-template-rows: 1fr 1fr;
     gap: 8px;
   }
 
   .site-footer {
-    height: 48px;
+    height: auto;
+    min-height: 48px;
     margin-top: 16px;
   }
 
   .chat-button {
-    min-height: 46.4px;
-    padding: 12px 24px;
+    min-height: 46px;
+    padding: 12px clamp(18px, 6.15vw, 24px);
     font-size: 16px;
     line-height: 1.4;
   }
 
   .social-links--footer {
-    gap: 8px;
+    gap: clamp(4px, 2vw, 8px);
   }
 
   .social-links--footer .social-link {
@@ -743,61 +778,21 @@ p {
   }
 }
 
-@media (max-width: 389.98px) {
-  .intro-lead {
-    font-size: 30px;
-    line-height: 1;
-  }
-
-  .about-intro {
-    gap: 8px;
-  }
-
-  .project-row--discord {
-    grid-template-columns: 99px 220px;
-    height: 231px;
-    aspect-ratio: auto;
-  }
-
-  .project-row--backyard {
-    grid-template-columns: 200px 119px;
-    height: 180px;
-    aspect-ratio: auto;
-  }
-
-  .project-row--quantum {
-    grid-template-columns: 119px 200px;
-    height: 280px;
-    aspect-ratio: auto;
-  }
-
-  .project-row--legacy-one {
-    grid-template-columns: 224px 110px;
-    width: 342px;
-    height: 140px;
-    margin-left: calc((100% - 342px) / 2);
-    aspect-ratio: auto;
-  }
-
-  .project-row--legacy-two {
-    grid-template-columns: 110px 209px;
-    height: 158px;
-    aspect-ratio: auto;
-  }
-}
-
 @media (max-width: 350px) {
-  .site-shell {
-    padding-inline: 20px;
-  }
-
   .social-links--header,
   .social-links--footer {
-    gap: 4px;
+    gap: 2px;
+  }
+
+  .social-link,
+  .social-links--footer .social-link {
+    width: 44px;
+    height: 44px;
+    padding: 14px;
   }
 
   .chat-button {
-    padding-inline: 18px;
+    padding-inline: 14px;
   }
 }
 

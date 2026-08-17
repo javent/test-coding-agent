@@ -31,6 +31,14 @@ const initMark = () => {
   animation.addEventListener("data_failed", () => renderMarkFallback(container));
 };
 
+const initImageFallbacks = () => {
+  document.querySelectorAll("img").forEach((image) => {
+    const markMissing = () => image.classList.add("is-missing");
+    image.addEventListener("error", markMissing, { once: true });
+    if (image.complete && image.naturalWidth === 0) markMissing();
+  });
+};
+
 const initReveals = () => {
   const elements = [...document.querySelectorAll(".reveal, .reveal-card")];
 
@@ -59,4 +67,5 @@ const initReveals = () => {
 };
 
 initMark();
+initImageFallbacks();
 initReveals();
